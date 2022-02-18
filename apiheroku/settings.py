@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from pickle import TRUE
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,11 @@ SECRET_KEY = 'django-insecure-kacdf-_d!=moo()s7i%-8a)#c9wgwq2(o9zpnq1ocicsnr88*$
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+# config cors
+
+JWT_SECRET_KEY= os.environ.get('JWT_SECRET_KEY')
+CORS_ORIGIN_ALLOW_ALL = TRUE
+CORS_ALLOW_CREDENTIAL = TRUE
 
 
 # Application definition
@@ -125,3 +132,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+import django_heroku
+django_heroku.settings(locals())
