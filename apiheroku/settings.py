@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from pickle import TRUE
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,12 +26,12 @@ SECRET_KEY = 'django-insecure-kacdf-_d!=moo()s7i%-8a)#c9wgwq2(o9zpnq1ocicsnr88*$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 # config cors
-
-JWT_SECRET_KEY= os.environ.get('JWT_SECRET_KEY')
-CORS_ORIGIN_ALLOW_ALL = TRUE
-CORS_ALLOW_CREDENTIAL = TRUE
+#configuracion de CORS 
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -45,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'rest_framework',
+    'corsheaders',   
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'apiheroku.urls'
@@ -131,8 +133,9 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
